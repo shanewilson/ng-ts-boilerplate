@@ -1,0 +1,13 @@
+{
+  "name": "ng-ts-boilerplate",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "1.2.24",
+    "angular-ui-router": "0.2.11",
+    "angular-loader": "1.2.24",
+    "angular-mocks": "1.2.24",
+    "lodash": "2.4.1",
+    "immutable": "2.0.17",
+    "jquery": "2.1.1"
+  }
+}
