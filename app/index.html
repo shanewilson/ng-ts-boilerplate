@@ -29,15 +29,19 @@
 <div data-ui-view></div>
 
 <!-- CDN Vendor Files -->
-<script src="js/libs/jquery/dist/jquery.js"></script>
-<script src="js/libs/lodash/dist/lodash.js"></script>
-<script src="js/libs/angular/angular.js"></script>
-<script src="js/libs/angular-ui-router/release/angular-ui-router.js"></script>
+<script async src="js/libs/jquery/dist/jquery.js"></script>
+<script async src="js/libs/lodash/dist/lodash.js"></script>
 
 <!-- Local Vendor Files -->
-<!-- build:js js/vendor.js -->
-<script src="js/libs/immutable/dist/Immutable.js"></script>
+<!-- build:js js/vendor.js async -->
+<script async src="js/libs/immutable/dist/Immutable.js"></script>
 <!-- endbuild -->
+
+<!-- Angular Files -->
+<script src="js/libs/angular/angular.js"></script>
+
+<!-- CDN Angular Files -->
+<script src="js/libs/angular-ui-router/release/angular-ui-router.js"></script>
 
 <!-- App -->
 <!-- build:js js/app.js -->

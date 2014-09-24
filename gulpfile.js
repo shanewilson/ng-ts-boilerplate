@@ -80,7 +80,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('js:bower', function () {
-    var filter = $.filter('**/*.min.js');
+    var filter = production ? $.filter('**/*.min.js') : $.filter('**/*.js');
     var stream = gulp.src(paths.bower);
 
     if (production) {
@@ -140,18 +140,22 @@ gulp.task('html', ['js:bower', 'ng:templates'], function () {
             $.cdnizer({
                 allowRev: true,
                 allowMin: true,
+                fallbackScript: "<script>function cdnizerLoad(u) {document.write('<scr'+'ipt src=\"'+u+'\"></scr'+'ipt>');}</script>",
                 fallbackTest: '<script>if(typeof ${ test } === "undefined") cdnizerLoad("${ filepath }");</script>',
                 files: [
                     'google:angular',          // for most libraries, that's all you'll need to do!
                     'google:jquery',
                     {
-                        file: 'js/libs/lodash/dist/lodash.js',
+                        cdn: 'cdnjs:lodash.js',
                         package: 'lodash',
-                        cdn: '//cdnjs.cloudflare.com/ajax/libs/lodash.js/${versionFull}/lodash.min.js'
+                        test: '_'
+                    },
+                    {
+                        cdn: 'cdnjs:angular-ui-router',
+                        test: '(function() {try {return !!angular.module("ui.router");} catch(e) {}})()'
                     }
                 ]}))
     }
-
     return stream
         .pipe(gulp.dest('dist'))
         .pipe($.size({title: 'html'}));
