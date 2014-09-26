@@ -1,19 +1,19 @@
-/// <reference path="types/types.ts"/>
+module ngApp.home {
+  "use strict";
 
+  /* @ngInject */
+  function homeConfig($stateProvider:ng.ui.IStateProvider) {
+    $stateProvider.state("home", {
+      url: "/",
+      controller: "HomeController as hc",
+      templateUrl: "home/templates/index.html"
+    });
+  }
 
-/* @ngInject */
-function homeConfig($stateProvider: ng.ui.IStateProvider) {
-  $stateProvider.state("home", {
-    url: "/home",
-    controller: "HomeController as vm",
-    templateUrl: "home/templates/index.html"
-  });
+  angular
+      .module("ngApp.home", [
+        "home.controller",
+        "ui.router.state"
+      ])
+      .config(homeConfig);
 }
-
-angular
-  .module("ngBoilerplate.home", [
-    "home.index",
-    "home.directives",
-    "ui.router.state"
-  ])
-  .config(homeConfig);

@@ -8,4 +8,3 @@
 // API TYPES
 
 // APP TYPES
-/// <reference path="types/app/core.ts"/>

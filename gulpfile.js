@@ -6,8 +6,8 @@ var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var pagespeed = require('psi');
-
 var fs = require('graceful-fs');
+var modRewrite = require('connect-modrewrite');
 
 var AUTOPREFIXER_BROWSERS = [
     'ie >= 10',
@@ -29,15 +29,15 @@ var paths = {
     "src": "./src",
     "dev": "./dist",
     "stage": "./dist",
-    "bower": "./bower_components/**/*.{js,map}",
+    "bower": "./bower_components/**/*.{js,css,map}",
     js: {},
     html: {}
 };
-paths.dest = production ? paths.stage : paths.dev;
+paths.ddest = production ? paths.stage : paths.dev;
 paths.js.src = paths.src + "/app/**/*";
-paths.js.dest = paths.dest + "/js";
+paths.js.dest = paths.ddest + "/js";
 //paths.bower = production ? paths.bower + ".min.js" : paths.bower + ".js";
-paths.vendor = paths.dest + "/js/libs";
+paths.vendor = paths.ddest + "/libs";
 paths.html.src = paths.src + "/index.html";
 paths.html.dest = paths.dest + "/index.html";
 // </paths>
@@ -64,23 +64,23 @@ gulp.task('fonts', function () {
 
 // Compile and Automatically Prefix Stylesheets
 gulp.task('styles', function () {
-    // For best performance, don't add Sass partials to `gulp.src`
-    return gulp.src([
-        'src/styles/*.scss',
-        'src/styles/**/*.css',
-        'src/styles/components/components.scss'
-    ])
-        .pipe($.changed('styles', {extension: '.css'}))
+    var f = production ? 'styles.min.css' : 'styles.css';
+
+    return gulp.src('app/styles/*.less')
+        .pipe($.changed('styles', {extension: '.less'}))
+        .pipe($.sourcemaps.init())
+        .pipe($.less())
         .pipe($.autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
-        .pipe(gulp.dest('.tmp/styles'))
+        .pipe($.concat(f))
+        .pipe($.if(production, $.csso()))
+        .pipe($.sourcemaps.write())
         // Concatenate And Minify Styles
-        .pipe($.if('*.css', $.csso()))
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('dist/css'))
         .pipe($.size({title: 'styles'}));
 });
 
 gulp.task('js:bower', function () {
-    var filter = production ? $.filter('**/*.min.js') : $.filter('**/*.js');
+    var filter = production ? $.filter('**/*.min.{js,css}') : $.filter('**/*.{js,css}');
     var stream = gulp.src(paths.bower);
 
     if (production) {
@@ -93,7 +93,7 @@ gulp.task('js:bower', function () {
             .pipe(filter.restore());
     }
 
-    return stream.pipe(gulp.dest('dist/js/libs'))
+    return stream.pipe(gulp.dest('dist/libs'))
         .pipe($.size({title: 'js:bower'}));
 });
 
@@ -117,10 +117,9 @@ gulp.task('rev', ['html'], function () {
             .pipe(assets.restore())
             .pipe($.useref())
             .pipe($.revReplace())
+//            .pipe($.minifyHtml({conditionals: true, cdata: true, empty: true}))
             .pipe(gulp.dest('dist'))
             .pipe($.gzip())
-            .pipe(gulp.dest('dist'))
-            .pipe($.minifyHtml({conditionals: true, cdata: true, empty: true}))
             .pipe(gulp.dest('dist'));
     }
 
@@ -136,6 +135,7 @@ gulp.task('html', ['js:bower', 'ng:templates'], function () {
     if (production) {
         stream
             .pipe($.replace('.js', '.min.js'))
+            .pipe($.replace('.css', '.min.css'))
             .pipe(
             $.cdnizer({
                 allowRev: true,
@@ -144,16 +144,16 @@ gulp.task('html', ['js:bower', 'ng:templates'], function () {
                 fallbackTest: '<script>if(typeof ${ test } === "undefined") cdnizerLoad("${ filepath }");</script>',
                 files: [
                     'google:angular',          // for most libraries, that's all you'll need to do!
-                    'google:jquery',
                     {
                         cdn: 'cdnjs:lodash.js',
                         package: 'lodash',
                         test: '_'
-                    },
-                    {
-                        cdn: 'cdnjs:angular-ui-router',
-                        test: '(function() {try {return !!angular.module("ui.router");} catch(e) {}})()'
                     }
+//                    ,
+//                    {
+//                        cdn: 'cdnjs:angular-ui-router',
+//                        test: '(function() {try {return !!angular.module("ui.router");} catch(e) {}})()'
+//                    }
                 ]}))
     }
     return stream
@@ -198,15 +198,18 @@ var tsProject = $.typescript.createProject({
 gulp.task('ts:compile', function () {
     var f = production ? 'app.min.js' : 'app.js';
     var tsResult = gulp.src('app/**/*.ts')
+
         .pipe($.typescript(tsProject));
 
     tsResult.dts.pipe(gulp.dest('dist/dts'));
 
     return tsResult.js
+        .pipe($.sourcemaps.init())
         .pipe($.concat(f))
         .pipe($.ngAnnotate())
         .pipe($.if(production, $.uglify()))
         .pipe($.wrap({ src: './iife.txt'}))
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest('dist/js'))
         .pipe($.size({title: 'typescript'}));
 });
@@ -246,9 +249,14 @@ gulp.task('serve', ['default'], function () {
         // Note: this uses an unsigned certificate which on first access
         //       will present a certificate warning in the browser.
         // https: true,
-        server: 'dist'
+        server: {
+            middleware: [
+                modRewrite(['!\\.html|\\images|\\.js|\\.css|\\.png|\\.jpg|\\.woff|\\.ttf|\\.svg /index.html [L]'])
+            ],
+            baseDir: 'dist'
+        }
     };
-    bsOpts.tunnel = production ? 'oicrgdcdev' : false;
+//    bsOpts.tunnel = production ? 'oicrgdcdev' : false;
 
     browserSync(bsOpts);
 

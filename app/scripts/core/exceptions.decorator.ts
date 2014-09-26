@@ -1,9 +1,3 @@
-/// <reference path="types/types.ts"/>
-
-angular
-  .module("ngBoilerplate")
-  .config(exceptionDecorator);
-
 /* @ngInject */
 function exceptionDecorator($provide: ng.auto.IProvideService) {
   $provide.decorator("$exceptionHandler",
@@ -17,3 +11,8 @@ function exceptionDecorator($provide: ng.auto.IProvideService) {
     }
   );
 }
+
+angular
+    .module("ngApp")
+    .config(exceptionDecorator);
+
