@@ -23,11 +23,10 @@ module ngApp.widgets.controllers {
   }
 
   class WidgetController implements IWidgetController {
-    widget:IWidget;
 
     /* @ngInject */
-    constructor(widget:IWidget) {
-      this.widget = widget;
+    constructor(public widget:IWidget) {
+
     }
   }
 
