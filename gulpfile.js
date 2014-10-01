@@ -68,12 +68,10 @@ gulp.task('styles', function () {
 
     return gulp.src('app/styles/*.less')
         .pipe($.changed('styles', {extension: '.less'}))
-        .pipe($.sourcemaps.init())
         .pipe($.less())
         .pipe($.autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
         .pipe($.concat(f))
         .pipe($.if(production, $.csso()))
-        .pipe($.sourcemaps.write())
         // Concatenate And Minify Styles
         .pipe(gulp.dest('dist/css'))
         .pipe($.size({title: 'styles'}));
@@ -117,7 +115,6 @@ gulp.task('rev', ['html'], function () {
             .pipe(assets.restore())
             .pipe($.useref())
             .pipe($.revReplace())
-//            .pipe($.minifyHtml({conditionals: true, cdata: true, empty: true}))
             .pipe(gulp.dest('dist'))
             .pipe($.gzip())
             .pipe(gulp.dest('dist'));
@@ -143,17 +140,12 @@ gulp.task('html', ['js:bower', 'ng:templates'], function () {
                 fallbackScript: "<script>function cdnizerLoad(u) {document.write('<scr'+'ipt src=\"'+u+'\"></scr'+'ipt>');}</script>",
                 fallbackTest: '<script>if(typeof ${ test } === "undefined") cdnizerLoad("${ filepath }");</script>',
                 files: [
-                    'google:angular',          // for most libraries, that's all you'll need to do!
+                    'google:angular',
                     {
                         cdn: 'cdnjs:lodash.js',
                         package: 'lodash',
                         test: '_'
                     }
-//                    ,
-//                    {
-//                        cdn: 'cdnjs:angular-ui-router',
-//                        test: '(function() {try {return !!angular.module("ui.router");} catch(e) {}})()'
-//                    }
                 ]}))
     }
     return stream
@@ -262,7 +254,7 @@ gulp.task('serve', ['default'], function () {
 
     if (!production) {
         gulp.watch(['app/**/*.html'], ['html', reload]);
-        gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
+        gulp.watch(['app/styles/**/*.{less,css}'], ['styles', reload]);
         gulp.watch(['app/scripts/**/*.ts'], ['ts:lint', 'ts:compile', reload]);
         gulp.watch(['app/scripts/**/*.html'], ['ng:templates', reload]);
         gulp.watch(['app/images/**/*'], ['images', reload]);

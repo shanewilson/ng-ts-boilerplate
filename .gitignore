@@ -1,8 +1,7 @@
-build/
 dist/
 node_modules/
 bower_components/
-.sass-cache/
+npm-debug.log
 
 *.iml
 .idea/

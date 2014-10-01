@@ -1,6 +1,6 @@
 {
   "name": "ng-ts-boilerplate",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "angular": "1.2.24",
     "angular-ui-router": "0.2.10",
@@ -9,13 +9,7 @@
     "lodash": "2.4.1",
     "immutable": "2.0.17",
     "jquery": "2.1.1",
-    "mobile-angular-ui": "~1.1.0-beta.30",
-    "angular-data": "~0.10.5"
-  },
-  "devDependencies": {
-    "angular-ui-bootstrap": "~0.11.0",
-    "angular-ui-bootstrap-bower": "~0.11.0",
-    "angular-cache": "~3.1.1",
-    "restangular": "~1.4.0"
+    "angular-ui-bootstrap-bower": "0.11.0",
+    "restangular": "1.4.0"
   }
 }
