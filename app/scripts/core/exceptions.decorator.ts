@@ -1,3 +1,5 @@
+/// <reference path="../../types/types.ts" />
+
 /* @ngInject */
 function exceptionDecorator($provide: ng.auto.IProvideService) {
   $provide.decorator("$exceptionHandler",

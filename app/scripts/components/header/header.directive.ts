@@ -1,6 +1,8 @@
-module ngApp.header.directives {
+/// <reference path="../../../types/types.ts" />
 
-  import IHeaderController = ngApp.header.controllers.IHeaderController;
+module ngApp.components.header.directives {
+
+  import IHeaderController = ngApp.components.header.controllers.IHeaderController;
 
   function header(): ng.IDirective {
     return {

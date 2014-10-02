@@ -1,3 +1,5 @@
+/// <reference path="../../types/types.ts" />
+
 module ngApp.home.controllers {
   export interface IHomeController {}
 

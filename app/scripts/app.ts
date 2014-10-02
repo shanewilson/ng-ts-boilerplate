@@ -1,4 +1,4 @@
-/// <reference path="types/types.ts"/>
+/// <reference path="../types/types.ts"/>
 
 declare module ngApp {
   interface IRootScope extends ng.IScope {

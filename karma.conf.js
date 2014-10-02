@@ -10,16 +10,21 @@ module.exports = function (config) {
             'karma-chai-sinon'
         ],
         files: [
-            'vendor/angular.js',
-            'vendor/ui-router.js',
-            'vendor/angular-mocks.js',
-            'vendor/lodash.js',
-            'build/src/templates.js',
-            'src/app/**/module.ts',
-            'src/app/**/!(module).ts',
-            'src/tests/unit/**/*.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/lodash/dist/lodash.js',
+            'dist/js/templates.js',
+//            'app/scripts/home/module.ts',
+//            'app/scripts/home/home.controllers.ts',
+//          'app/scripts/components/header/module.ts',
+//          'app/scripts/components/header/header.controller.ts',
+//          'app/scripts/components/header/header.directive.ts',
+            'app/scripts/**/*.ts',
+//            'app/scripts/**/!(module).ts',
+            'app/tests/unit/**/*.js'
         ],
-        exclude: ['src/tests/integration/**/*.js'],
+        exclude: ['app/tests/integration/**/*.js'],
         preprocessors: {
             '**/*.ts': ['typescript']
         }

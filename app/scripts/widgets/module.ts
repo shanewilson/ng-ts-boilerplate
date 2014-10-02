@@ -1,3 +1,8 @@
+/// <reference path="../../types/types.ts" />
+/// <reference path="widgets.controllers.ts"/>
+/// <reference path="widgets.models.ts"/>
+/// <reference path="widgets.services.ts"/>
+
 module ngApp.widgets {
   "use strict";
 

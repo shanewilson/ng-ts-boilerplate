@@ -1,3 +1,5 @@
+/// <reference path="../../types/types.ts" />
+
 module ngApp.widgets.models {
   import IPagination = ngApp.models.IPagination;
   import Pagination = ngApp.models.Pagination;

@@ -1,3 +1,6 @@
+/// <reference path="../../types/types.ts" />
+/// <reference path="home.controllers.ts"/>
+
 module ngApp.home {
   "use strict";
 

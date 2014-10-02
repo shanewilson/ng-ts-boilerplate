@@ -1,3 +1,5 @@
+/// <reference path="../../types/types.ts" />
+
 module ngApp.widgets.controllers {
   import IWidget = ngApp.widgets.models.IWidget;
   import IWidgets = ngApp.widgets.models.IWidgets;

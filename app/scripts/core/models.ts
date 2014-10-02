@@ -1,3 +1,5 @@
+/// <reference path="../../types/types.ts" />
+
 module ngApp.models {
   export interface ICollection {
     pagination: IPagination;
