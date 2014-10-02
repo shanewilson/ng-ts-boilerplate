@@ -1,5 +1,3 @@
-/// <reference path="../../../types/types.ts" />
-
 module ngApp.components.header.controllers {
   export interface IHeaderController {
     isCollapsed: boolean;

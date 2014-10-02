@@ -160,6 +160,7 @@ gulp.task('karma:once', function () {
   return gulp.src('app/test/**/*.js')
       .pipe($.karma({
         configFile: 'karma.conf.js',
+        noResolve: true,
         action: 'run'
       }))
       .on('error', function (err) {
@@ -169,7 +170,8 @@ gulp.task('karma:once', function () {
 });
 
 gulp.task('karma:watch', function () {
-  return gulp.src('app/test/**/*.js')
+  return gulp.src('app/scripts/**/*.ts')
+      .concat('app.js')
       .pipe(karma({
         configFile: 'karma.conf.js',
         action: 'watch'

@@ -1,5 +1,3 @@
-/// <reference path="../../types/types.ts" />
-
 module ngApp.widgets.services {
   import IWidget = ngApp.widgets.models.IWidget;
   import Widget = ngApp.widgets.models.Widget;

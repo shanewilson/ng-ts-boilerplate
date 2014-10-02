@@ -1,5 +1,3 @@
-/// <reference path="../../../types/types.ts" />
-
 module ngApp.components.header.directives {
 
   import IHeaderController = ngApp.components.header.controllers.IHeaderController;

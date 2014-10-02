@@ -60,6 +60,7 @@
   },
   "scripts": {
     "bower": "bower install",
+    "test": "gulp karma:once",
     "start": "gulp serve",
     "test": "gulp karma:once",
     "build": "gulp",
