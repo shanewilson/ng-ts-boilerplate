@@ -9,7 +9,11 @@ module ngApp.widgets {
     $stateProvider.state("widgets", {
       url: "/widgets",
       controller: "WidgetsController as wsc",
-      templateUrl: "widgets/templates/widgets.html"
+      templateUrl: "widgets/templates/widgets.html",
+      resolve: {
+        widgets: (WidgetsService: IWidgetsService) => {
+          return WidgetsService.getWidgets();
+        }}
     });
 
     $stateProvider.state("widget", {
@@ -17,8 +21,7 @@ module ngApp.widgets {
       controller: "WidgetController as wc",
       templateUrl: "widgets/templates/widget.html",
       resolve: {
-        widget: ($stateParams: ng.ui.IStateParamsService,
-                 WidgetsService: IWidgetsService) : ng.IPromise<IWidget> => {
+        widget: ($stateParams: ng.ui.IStateParamsService, WidgetsService: IWidgetsService): ng.IPromise<IWidget> => {
           return WidgetsService.getWidget($stateParams["widgetId"]);
         }
       }

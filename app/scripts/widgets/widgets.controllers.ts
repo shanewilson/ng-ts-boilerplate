@@ -1,5 +1,4 @@
 module ngApp.widgets.controllers {
-  import IWidgetsService = ngApp.widgets.services.IWidgetsService;
   import IWidget = ngApp.widgets.models.IWidget;
   import IWidgets = ngApp.widgets.models.IWidgets;
 
@@ -8,14 +7,8 @@ module ngApp.widgets.controllers {
   }
 
   class WidgetsController implements IWidgetsController {
-    widgets: IWidgets;
-
     /* @ngInject */
-    constructor(WidgetsService: IWidgetsService) {
-      WidgetsService.getWidgets().then((widgets: IWidgets) => {
-        this.widgets = widgets;
-      });
-    }
+    constructor(public widgets: IWidgets) {}
   }
 
   export interface IWidgetController {
@@ -23,12 +16,8 @@ module ngApp.widgets.controllers {
   }
 
   class WidgetController implements IWidgetController {
-    widget: IWidget;
-
     /* @ngInject */
-    constructor(widget: IWidget) {
-      this.widget = widget;
-    }
+    constructor(public widget: IWidget) {}
   }
 
   angular
