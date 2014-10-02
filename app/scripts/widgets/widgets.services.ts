@@ -7,36 +7,36 @@ module ngApp.widgets.services {
   import Widgets = ngApp.widgets.models.Widgets;
 
   export interface IWidgetsService {
-    getWidget(id:string): ng.IPromise<Widget>;
-    getWidgets(params?:Object): ng.IPromise<Widgets>;
+    getWidget(id: string): ng.IPromise<Widget>;
+    getWidgets(params?: Object): ng.IPromise<Widgets>;
   }
 
   class WidgetsService implements IWidgetsService {
-    private static logWidget(id:string, params:Object) {
+    private static logWidget(id: string, params: Object) {
       console.log("Received widget ", id, " request with params: ", params);
     }
 
-    private static logWidgets(params:Object) {
+    private static logWidgets(params: Object) {
       console.log("Received widgets request with params: ", params);
     }
 
-    private ds:restangular.IElement;
+    private ds: restangular.IElement;
 
     /* @ngInject */
-    constructor(Restangular:restangular.IService) {
-      this.ds = Restangular.all('projects')
+    constructor(Restangular: restangular.IService) {
+      this.ds = Restangular.all("projects");
     }
 
-    getWidget(id:string, params:Object = {}):ng.IPromise<Widget> {
+    getWidget(id: string, params: Object = {}): ng.IPromise<Widget> {
       WidgetsService.logWidget(id, params);
       return this.ds.get(id, params).then(function (response) {
         return new Widget(response);
       });
     }
 
-    getWidgets(params:Object = {}):ng.IPromise<Widgets> {
+    getWidgets(params: Object = {}): ng.IPromise<Widgets> {
       WidgetsService.logWidgets(params);
-      return this.ds.get('', params).then(function (response) {
+      return this.ds.get("", params).then(function (response) {
         return new Widgets(response);
       });
     }

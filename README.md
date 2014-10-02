@@ -20,6 +20,7 @@ The project is setup to use Bower and NPM
 
 ```
 > npm install
+> npm run bower
 ```
 
 

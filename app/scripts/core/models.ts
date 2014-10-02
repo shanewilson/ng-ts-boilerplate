@@ -1,13 +1,12 @@
 module ngApp.models {
   export interface ICollection {
-    pagination:IPagination
-    hits:any[]
-    facets?:IFacet[]
+    pagination: IPagination;
+    hits: any[];
+    facets?: IFacet[];
   }
 
   export enum SortOrder {
-    asc,
-    desc
+    asc, desc
   }
 
   export interface IPagination {
@@ -31,7 +30,7 @@ module ngApp.models {
     sort: string;
     order: SortOrder;
 
-    constructor(obj:any) {
+    constructor(obj: any) {
       this.count = obj.count;
       this.total = obj.total;
       this.size = obj.size;
@@ -50,10 +49,10 @@ module ngApp.models {
   }
 
   export class Facet implements IFacet {
-    term:string;
-    value:any;
+    term: string;
+    value: any;
 
-    constructor(obj:any) {
+    constructor(obj: any) {
       this.term = obj.term;
       this.value = obj.value;
     }

@@ -1,10 +1,7 @@
 module ngApp.home.controllers {
   export interface IHomeController {}
 
-  class HomeController implements IHomeController {
-    /* @ngInject */
-    constructor() {}
-  }
+  class HomeController implements IHomeController {}
 
   angular
       .module("home.controller", [])

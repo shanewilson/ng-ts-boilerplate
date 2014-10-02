@@ -2,7 +2,7 @@ module ngApp.home {
   "use strict";
 
   /* @ngInject */
-  function homeConfig($stateProvider:ng.ui.IStateProvider) {
+  function homeConfig($stateProvider: ng.ui.IStateProvider) {
     $stateProvider.state("home", {
       url: "/",
       controller: "HomeController as hc",

@@ -8,10 +8,6 @@ module ngApp.header.controllers {
   class HeaderController implements IHeaderController {
     isCollapsed: boolean = true;
 
-    /* @ngInject */
-    constructor() {
-    }
-
     collapse() : void {
       this.isCollapsed = true;
     }

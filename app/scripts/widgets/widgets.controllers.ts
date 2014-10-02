@@ -8,11 +8,11 @@ module ngApp.widgets.controllers {
   }
 
   class WidgetsController implements IWidgetsController {
-    widgets:IWidgets;
+    widgets: IWidgets;
 
     /* @ngInject */
-    constructor(WidgetsService:IWidgetsService) {
-      WidgetsService.getWidgets().then((widgets:IWidgets) => {
+    constructor(WidgetsService: IWidgetsService) {
+      WidgetsService.getWidgets().then((widgets: IWidgets) => {
         this.widgets = widgets;
       });
     }
@@ -23,10 +23,10 @@ module ngApp.widgets.controllers {
   }
 
   class WidgetController implements IWidgetController {
-    widget:IWidget;
+    widget: IWidget;
 
     /* @ngInject */
-    constructor(widget:IWidget) {
+    constructor(widget: IWidget) {
       this.widget = widget;
     }
   }
@@ -36,5 +36,5 @@ module ngApp.widgets.controllers {
         "widgets.services"
       ])
       .controller("WidgetsController", WidgetsController)
-      .controller("WidgetController", WidgetController)
+      .controller("WidgetController", WidgetController);
 }

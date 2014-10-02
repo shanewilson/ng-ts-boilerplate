@@ -6,45 +6,45 @@ module ngApp.widgets.models {
   import ICollection = ngApp.models.ICollection;
 
   export interface IWidgets extends ICollection {
-    hits:IWidget[]
+    hits: IWidget[];
   }
 
   export class Widgets implements IWidgets {
-    pagination:IPagination;
-    facets:IFacet[];
-    hits:IWidget[];
+    pagination: IPagination;
+    facets: IFacet[];
+    hits: IWidget[];
 
-    constructor(obj:ICollection) {
+    constructor(obj: ICollection) {
       this.hits = this._getHits(obj.hits);
       this.facets = this._getFacets(obj.facets);
       this.pagination = new Pagination(obj.pagination);
     }
 
-    private _getHits(hits:Object[]):IWidget[] {
-      return hits.map((hit:Object):IWidget => {
-        return new Widget(hit)
-      })
+    private _getHits(hits: Object[]): IWidget[] {
+      return hits.map((hit: Object): IWidget => {
+        return new Widget(hit);
+      });
     }
 
-    private _getFacets(facets:Object[] = []):IFacet[] {
-      return facets.map((facet:Object):IFacet => {
-        return new Facet(facet)
-      })
+    private _getFacets(facets: IFacet[] = []): IFacet[] {
+      return facets.map((facet: IFacet): IFacet => {
+        return new Facet(facet);
+      });
     }
   }
 
   export interface IWidget {
-    id:string;
-    name:string;
-    description:string;
+    id: string;
+    name: string;
+    description: string;
   }
 
   export class Widget implements IWidget {
-    id:string = "--";
-    name:string = "--";
-    description:string = "--";
+    id: string = "--";
+    name: string = "--";
+    description: string = "--";
 
-    constructor(obj:any) {
+    constructor(obj: any) {
       this.id = obj.id || this.id;
       this.name = obj.name || this.name;
       this.description = obj.description || this.description;

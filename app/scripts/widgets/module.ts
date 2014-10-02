@@ -5,7 +5,7 @@ module ngApp.widgets {
   import IWidget = ngApp.widgets.models.IWidget;
 
   /* @ngInject */
-  function widgetsConfig($stateProvider:ng.ui.IStateProvider) {
+  function widgetsConfig($stateProvider: ng.ui.IStateProvider) {
     $stateProvider.state("widgets", {
       url: "/widgets",
       controller: "WidgetsController as wsc",
@@ -17,7 +17,8 @@ module ngApp.widgets {
       controller: "WidgetController as wc",
       templateUrl: "widgets/templates/widget.html",
       resolve: {
-        widget: ($stateParams:ng.ui.IStateParamsService, WidgetsService: IWidgetsService) : ng.IPromise<IWidget> => {
+        widget: ($stateParams: ng.ui.IStateParamsService,
+                 WidgetsService: IWidgetsService) : ng.IPromise<IWidget> => {
           return WidgetsService.getWidget($stateParams["widgetId"]);
         }
       }
