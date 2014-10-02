@@ -1,6 +1,6 @@
-module ngApp.header.directives {
+module ngApp.components.header.directives {
 
-  import IHeaderController = ngApp.header.controllers.IHeaderController;
+  import IHeaderController = ngApp.components.header.controllers.IHeaderController;
 
   function header(): ng.IDirective {
     return {

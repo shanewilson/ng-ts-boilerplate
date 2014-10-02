@@ -1,4 +1,4 @@
-module ngApp.header.controllers {
+module ngApp.components.header.controllers {
   export interface IHeaderController {
     isCollapsed: boolean;
     toggleCollapsed(): void;

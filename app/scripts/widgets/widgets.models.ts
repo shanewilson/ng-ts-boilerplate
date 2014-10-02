@@ -14,7 +14,7 @@ module ngApp.widgets.models {
     facets: IFacet[];
     hits: IWidget[];
 
-    constructor(obj: ICollection) {
+    constructor(obj: any) {
       this.hits = this._getHits(obj.hits);
       this.facets = this._getFacets(obj.facets);
       this.pagination = new Pagination(obj.pagination);

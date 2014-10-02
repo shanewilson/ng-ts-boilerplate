@@ -57,6 +57,7 @@
   },
   "scripts": {
     "bower": "bower install",
+    "test": "gulp karma:once",
     "start": "gulp serve",
     "build": "gulp",
     "upgrade": "./node_modules/npm-check-updates/bin/npm-check-updates -u && bower update"

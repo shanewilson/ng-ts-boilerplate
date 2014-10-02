@@ -1,6 +1,6 @@
 /// <reference path="types/types.ts"/>
 
-declare module ngApp.header {}
+module ngApp.components.header {}
 
 angular
     .module("components.header", [
