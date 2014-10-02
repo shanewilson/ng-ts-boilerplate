@@ -15,13 +15,7 @@ module.exports = function (config) {
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/lodash/dist/lodash.js',
             'dist/js/templates.js',
-//            'app/scripts/home/module.ts',
-//            'app/scripts/home/home.controllers.ts',
-//          'app/scripts/components/header/module.ts',
-//          'app/scripts/components/header/header.controller.ts',
-//          'app/scripts/components/header/header.directive.ts',
             'app/scripts/**/*.ts',
-//            'app/scripts/**/!(module).ts',
             'app/tests/unit/**/*.js'
         ],
         exclude: ['app/tests/integration/**/*.js'],
