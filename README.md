@@ -1,7 +1,6 @@
 `Buzzwords: #typescript #angularjs #immutablejs #gulp #less #bower #selenium`
 
-Technologies
-=
+# Technologies
 
 - [Typescript](http://www.typescriptlang.org/) - TypeScript lets you write JavaScript the way you really want to.
 - [Angular](https://angularjs.org/) - HTML enhanced for web apps
@@ -12,17 +11,40 @@ Technologies
 - [Protractor](https://github.com/angular/protractor) - E2E test framework for Angular apps
 - [Less](http://learnboost.github.io/stylus/)
 
-Setup
-=
+# Setup
+
+###Git hook
+
+Git commit-msg hook is based on Angular's [Guidelines](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#)
+
+- Create a git commit message hook file
+
+```
+mv .git/hooks/commit-msg.sample .git/hooks/commit-msg
+```
+
+- Edit `.git/hooks/commit-msg`
+
+```
+#!/bin/sh
+
+exec < /dev/tty
+git_hooks/validate-commit.py $1
+```
+- Make sure `git_hooks/validate-commit.py` is executable
+
+```
+chmod 755 git_hooks/validate-commit.py
+```
+
+### Dependences
 
 The project is setup to use Bower and NPM
-
 
 ```
 > npm install
 > npm run bower
 ```
-
 
 Tests
 =
